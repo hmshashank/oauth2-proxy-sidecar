@@ -9,7 +9,7 @@ spec:
   - host: foo.bar.com
     http:
       paths:
-        - path: /app
+        - path: /
           pathType: Prefix
           backend:
             service:
