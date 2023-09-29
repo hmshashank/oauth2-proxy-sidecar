@@ -1,0 +1,31 @@
+apiVersion: v1
+data:
+  oauth2-proxy.cfg: |-
+    # Provider config
+    provider="keycloak"
+    provider_display_name="keycloak"
+    login_url="https://172-105-45-126.ip.linodeusercontent.com/realms/OAuth2-demo/protocol/openid-connect/auth"
+    redeem_url="https://172-105-45-126.ip.linodeusercontent.com/realms/OAuth2-demo/protocol/openid-connect/token"
+    validate_url="https://172-105-45-126.ip.linodeusercontent.com/realms/OAuth2-demo/protocol/openid-connect/userinfo"
+    profile_url="https://172-105-45-126.ip.linodeusercontent.com/realms/OAuth2-demo/protocol/openid-connect/userinfo"
+    ssl_insecure_skip_verify=true
+    # Client config
+    client_id="ngab"
+    client_secret="UbvRE2RKDiCQXCfoSe0ERxkTmK2AJmyc"
+    cookie_secret="ZzBkN000Wm0pQkVkKUhzMk5YPntQRUw_ME1oMTZZTy0="
+    cookie_secure="false"
+    # Upstream config
+    http_address="0.0.0.0:4180"
+    upstreams="file:///dev/null"
+    redirect_url="https://foo.bar.com/oauth2/callback"
+    email_domains=["*"]
+    oidc_issuer_url="https://172-105-45-126.ip.linodeusercontent.com/realms/OAuth2-demo"
+    cookie_domains=["foo.bar.com"]
+    scope="openid"
+    whitelist_domains=[".foo.bar.com:*"]
+    session_store_type="redis"
+    redis_connection_url="redis://10.128.45.209:6379"
+kind: ConfigMap
+metadata:
+  name: oauth2-proxy-config
+  namespace: default

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: default
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      volumes:
+        - name: oauth2-proxy-config
+          configMap:
+            name: oauth2-proxy-config
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+      - name: oauth-proxy
+        image: quay.io/oauth2-proxy/oauth2-proxy:latest
+        ports:
+          - containerPort: 4180
+        volumeMounts:
+          - name: oauth2-proxy-config
+            mountPath: /etc/oauth2-proxy.cfg
+            subPath: oauth2-proxy.cfg
+        args:
+          - --config=/etc/oauth2-proxy.cfg

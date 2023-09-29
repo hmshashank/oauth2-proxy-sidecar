@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+  oauth2-proxy.cfg: |-
+    # Provider config
+    provider="github"
+    # Client config
+    client_id="b3ae350f024e1f8fdffe"
+    client_secret="d9d8ce8d65eaddb7f9642f8f232e86643d10c524"
+    cookie_secret="Pk5j4FqBaKQLVEzPpGsrR1qgte5bRIsd"
+    # Upstream config
+    http_address="0.0.0.0:4180"
+    upstreams="file:///dev/null"
+    email_domains=["*"]
+    #redirect_url = "https://foo.bar.com/oauth2/callback"
+    # Redis session store config
+    session_store_type="redis"
+    redis_connection_url="redis://10.128.58.253:6379"
+kind: ConfigMap
+metadata:
+  name: oauth2-proxy-config
+  namespace: default
